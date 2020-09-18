@@ -35,12 +35,9 @@ namespace Pract1
             }
             catch (OverflowException)
             {
-                Console.WriteLine("Возраст больше 255");
+                Console.WriteLine("Возраст больше 255 или меньше 0");
                 throw;
             }
         }
-
-
-
     }
 }

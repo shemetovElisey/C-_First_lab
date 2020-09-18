@@ -13,14 +13,23 @@ namespace Pract1
             List<Person> people = new List<Person>();
 
             using StreamReader inF = new StreamReader("in.txt", Encoding.UTF8);
-            while (inF.Peek() != -1)
+            try
             {
-                string[] things = inF.ReadLine().Split(' ');
-                people.Add(new Person(things[0], things[1], things[2],
-                    (float)Convert.ToDouble(things[3]),
-                (float)Convert.ToDouble(things[4]),
-                DateTime.ParseExact(things[5], "dd/MM/yyyy",
-                System.Globalization.CultureInfo.InvariantCulture)));
+                while (inF.Peek() != -1)
+                {
+                    string[] things = inF.ReadLine().Split(' ');
+                    people.Add(new Person(things[0], things[1], things[2],
+                        (float)Convert.ToDouble(things[3]),
+                    (float)Convert.ToDouble(things[4]),
+                    DateTime.ParseExact(things[5], "dd/MM/yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture)));
+                }
+            }
+
+            catch (FormatException)
+            {
+                Console.WriteLine("Данные введенны неверно");
+                throw;
             }
 
             Console.WriteLine("Выберите направление сортировки\nПо возрастанию: 1\n" +
@@ -37,11 +46,11 @@ namespace Pract1
             {
                 CultureInfo ruRU = new CultureInfo("ru-RU");
                 foreach (Person var in people)
-                    f.WriteLine("{0,-18}{1,-18}{2,-18}{3,-9}{4,-13}{5, -13}{6}",
-                        var.SName, var.FName, var.Patr, var.GetAge(),
-                        var.Weight.ToString("e3"),
-                        var.Hight.ToString("e3"),
-                        var.Birth.ToString("dd MMMM yyyy", ruRU).ToLower());
+                    f.WriteLine($"{var.SName,-18}{var.FName,-18}" +
+                        $"{var.Patr,-18}{var.GetAge(),-9}" +
+                        $"{var.Weight.ToString("e3"),-13}" +
+                        $"{var.Hight.ToString("e3"), -13}" +
+                        $"{var.Birth.ToString("dd MMMM yyyy", ruRU).ToLower()}");
             }
         }
     }
