@@ -44,11 +44,11 @@ namespace Pract1
          using StreamWriter f = new StreamWriter(output, Encoding.UTF8);
          {
             CultureInfo ruRU = new CultureInfo("ru-RU");
-            foreach (Person var in people)
-               f.WriteLine($"{var.SName,-18}{var.FName,-18}" +
-                   $"{var.Patr,-18}{var.GetAge(),-9}" +
-                   $"{var.Weight,-13:e3}" +
-                   $"{var.Birth.ToString("dd MMMM yyyy", ruRU).ToLower()}");
+            foreach (Person person in people)
+               f.WriteLine($"{person.SName,-18}{person.FName,-18}" +
+                   $"{person.MName,-18}{person.GetAge(),-9}" +
+                   $"{person.Weight,-13:e3}" +
+                   $"{person.BirthDate.ToString("dd MMMM yyyy", ruRU).ToLower()}");
          }
       }
    }
